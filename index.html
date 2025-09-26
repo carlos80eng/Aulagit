@@ -1,11 +1,679 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carlos Pereira de Carvalho Junior - Portfólio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="1000" height="1000" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 6px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .typing-text {
+            border-right: 3px solid white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: white; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .skill-item {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--light-bg), white);
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .btn-custom {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px 0 20px 40px;
+            border-left: 2px solid var(--secondary-color);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Carlos Pereira</h1>
-</body>
-</html>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Carlos Pereira</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projetos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experiência</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4">Bem-vindo à página do <span class="text-warning">Carlos Pereira</span></h1>
+                    <h3 class="mb-4">Eu sou <span id="typing-text" class="typing-text">Desenvolvedor Full Stack</span></h3>
+                    <p class="lead mb-4">Apaixonado por criar soluções digitais inovadoras e transformar ideias em realidade através da tecnologia.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#contact" class="btn btn-custom btn-lg">
+                            <i class="fas fa-envelope me-2"></i>Entre em Contato
+                        </a>
+                        <a href="#projects" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-eye me-2"></i>Ver Projetos
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 250 250'%3E%3Ccircle cx='125' cy='125' r='125' fill='%23ffffff' opacity='0.1'/%3E%3Ccircle cx='125' cy='80' r='30' fill='%23ffffff' opacity='0.8'/%3E%3Cpath d='M75 150 Q125 180 175 150 Q175 200 125 220 Q75 200 75 150' fill='%23ffffff' opacity='0.8'/%3E%3C/svg%3E" alt="Carlos Pereira" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">Sobre Mim</h2>
+                    <p class="lead text-muted">Conheça um pouco da minha trajetória e paixões</p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Desenvolvedor apaixonado por inovação</h3>
+                    <p class="mb-4">Com mais de 5 anos de experiência em desenvolvimento web, tenho me dedicado a criar soluções digitais que fazem a diferença na vida das pessoas. Minha jornada começou com curiosidade sobre como as coisas funcionam na web, e hoje trabalho com as mais modernas tecnologias do mercado.</p>
+                    <p class="mb-4">Acredito que a tecnologia deve ser acessível e útil para todos. Por isso, sempre busco desenvolver interfaces intuitivas e experiências de usuário excepcionais, combinando design moderno com funcionalidade robusta.</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="text-primary">50+</h4>
+                            <p class="small">Projetos Concluídos</p>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-primary">5+</h4>
+                            <p class="small">Anos de Experiência</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <div class="skill-progress">
+                                <h6>Frontend</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="skill-progress">
+                                <h6>Backend</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="skill-progress">
+                                <h6>Database</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="skill-progress">
+                                <h6>Mobile</h6>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">Habilidades</h2>
+                    <p class="lead text-muted">Tecnologias que domino e uso no dia a dia</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fab fa-js-square skill-icon"></i>
+                        <h4>JavaScript</h4>
+                        <p>Desenvolvimento moderno com ES6+, frameworks como React, Vue.js e Node.js para aplicações completas.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fab fa-python skill-icon"></i>
+                        <h4>Python</h4>
+                        <p>Desenvolvimento backend com Django e Flask, automação, análise de dados e machine learning.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fas fa-database skill-icon"></i>
+                        <h4>Banco de Dados</h4>
+                        <p>MySQL, PostgreSQL, MongoDB e Redis para soluções de armazenamento eficientes e escaláveis.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fab fa-aws skill-icon"></i>
+                        <h4>Cloud & DevOps</h4>
+                        <p>AWS, Docker, Kubernetes e CI/CD para deploy e manutenção de aplicações em produção.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fas fa-mobile-alt skill-icon"></i>
+                        <h4>Mobile</h4>
+                        <p>React Native e Flutter para desenvolvimento de aplicações móveis multiplataforma.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="skill-item text-center">
+                        <i class="fas fa-paint-brush skill-icon"></i>
+                        <h4>UI/UX Design</h4>
+                        <p>Design responsivo, prototipagem com Figma e criação de experiências de usuário intuitivas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">Projetos</h2>
+                    <p class="lead text-muted">Alguns dos meus trabalhos mais recentes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title">E-commerce Platform</h5>
+                            <p class="card-text">Plataforma completa de e-commerce desenvolvida com React, Node.js e MongoDB. Sistema de pagamento integrado e painel administrativo.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary me-1">React</span>
+                                <span class="badge bg-success me-1">Node.js</span>
+                                <span class="badge bg-info me-1">MongoDB</span>
+                            </div>
+                            <a href="#" class="btn btn-custom">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title">Dashboard Analytics</h5>
+                            <p class="card-text">Dashboard interativo para análise de dados com gráficos em tempo real, desenvolvido com Vue.js e Python Flask.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-success me-1">Vue.js</span>
+                                <span class="badge bg-warning me-1">Python</span>
+                                <span class="badge bg-danger me-1">Flask</span>
+                            </div>
+                            <a href="#" class="btn btn-custom">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title">App de Delivery</h5>
+                            <p class="card-text">Aplicativo mobile para delivery de comida com geolocalização, pagamento integrado e sistema de avaliações.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-info me-1">React Native</span>
+                                <span class="badge bg-dark me-1">Firebase</span>
+                                <span class="badge bg-primary me-1">Maps API</span>
+                            </div>
+                            <a href="#" class="btn btn-custom">Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">Experiência</h2>
+                    <p class="lead text-muted">Minha trajetória profissional</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Senior Full Stack Developer</h5>
+                                <span class="badge bg-primary">2022 - Presente</span>
+                            </div>
+                            <h6 class="text-muted mb-3">Tech Solutions Inc.</h6>
+                            <p>Liderança técnica de equipe de desenvolvimento, arquitetura de sistemas escaláveis e mentoria de desenvolvedores juniores. Implementação de soluções cloud-native com foco em performance e segurança.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Full Stack Developer</h5>
+                                <span class="badge bg-secondary">2020 - 2022</span>
+                            </div>
+                            <h6 class="text-muted mb-3">Digital Innovation Labs</h6>
+                            <p>Desenvolvimento de aplicações web modernas usando React, Node.js e cloud services. Participação ativa em projetos de transformação digital para grandes empresas.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="mb-0">Frontend Developer</h5>
+                                <span class="badge bg-secondary">2019 - 2020</span>
+                            </div>
+                            <h6 class="text-muted mb-3">StartUp Web Agency</h6>
+                            <p>Especialização em desenvolvimento frontend com foco em experiência do usuário, interfaces responsivas e otimização de performance. Trabalho direto com designers UX/UI.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">Entre em Contato</h2>
+                    <p class="lead text-muted">Vamos conversar sobre seu próximo projeto</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h5>Email</h5>
+                        <p class="text-muted">carlos.pereira@email.com</p>
+                        <a href="mailto:carlos.pereira@email.com" class="btn btn-custom">Enviar Email</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fab fa-linkedin contact-icon"></i>
+                        <h5>LinkedIn</h5>
+                        <p class="text-muted">linkedin.com/in/carlospereira</p>
+                        <a href="#" class="btn btn-custom">Conectar</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fab fa-github contact-icon"></i>
+                        <h5>GitHub</h5>
+                        <p class="text-muted">github.com/carlospereira</p>
+                        <a href="#" class="btn btn-custom">Ver Projetos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-card">
+                        <h4 class="mb-4">Envie uma Mensagem</h4>
+                        <form id="contact-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" id="name" placeholder="Seu Nome" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="Seu Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" id="subject" placeholder="Assunto" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" id="message" rows="5" placeholder="Sua Mensagem" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-custom btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Carlos Pereira. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Typing animation
+        const texts = ['Desenvolvedor Full Stack', 'Programador Python', 'Especialista React', 'Consultor Tech'];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typingText = document.getElementById('typing-text');
+        
+        function typeText() {
+            if (charIndex < texts[textIndex].length) {
+                typingText.textContent = texts[textIndex].substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeText, 100);
+            } else {
+                setTimeout(deleteText, 2000);
+            }
+        }
+        
+        function deleteText() {
+            if (charIndex > 0) {
+                typingText.textContent = texts[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(deleteText, 50);
+            } else {
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(typeText, 500);
+            }
+        }
+        
+        // Start typing animation
+        setTimeout(typeText, 1000);
+
+        // Progress bars animation
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 2s ease';
+                    bar.style.width = width;
+                }, 500);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'about') {
+                        animateProgressBars();
+                    }
+                    
+                    // Add fade-in animation to skill items
+                    const skillItems = entry.target.querySelectorAll('.skill-item');
+                    skillItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Initialize skill items with hidden state
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+        });
+
+        // Contact form handling
